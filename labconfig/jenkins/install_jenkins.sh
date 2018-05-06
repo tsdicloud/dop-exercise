@@ -25,3 +25,7 @@ sudo firewall-cmd --permanent --add-service=jenkins
 sudo firewall-cmd --zone=public --add-service=http --permanent
 sudo firewall-cmd --reload
 
+# disable security
+sudo cp config.xml /var/lib/jenkins/config.xml
+
+
