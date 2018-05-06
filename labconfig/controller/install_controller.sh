@@ -57,7 +57,7 @@ sudo mv -i -f /tmp/kubectl /usr/local/bin/kubectl
 # prepare commandline completion and config directories
 echo "source <(kubectl completion bash)" >> ~/.bashrc#
 mkdir $HOME.kube
-chmod 600 $HOME/.kube
+chmod 700 $HOME/.kube
 
 echo "
 # some useful kubernetes aliased
