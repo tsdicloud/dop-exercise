@@ -1,7 +1,7 @@
 #
 # this is the base image for different elk componente/services
 # Baseimage: CentOS7 with systemd enabled
-FROM 160.44.200.121:443/otc00000000001000000317/java8-centos7-base:1.8
+FROM 160.44.200.121:443/otc-eu-de-00000000001000023731/java8-centos7-base:1.8
 
 LABEL maintainer="Bernd Rederlechner <bernd.rederlechner@t-systems.com>" \
       tsystems.project="CCE Devops Tutorial" \
