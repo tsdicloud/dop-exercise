@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: 2017-09-13T10:57:24Z
+  labels:
+    app: elk-objectstore-app
+  name: elastictransport
+  #namespace: default
+spec:
+  ports:
+  - name: transport
+    port: 9300
+    protocol: TCP
+    targetPort: 9300
+  # nodePort: 30445
+  selector:
+    app: elk-objectstore-app
+    component: elk-elasticsearch
+  sessionAffinity: None
+  type: ClusterIP
+  #type: NodePort
+ 

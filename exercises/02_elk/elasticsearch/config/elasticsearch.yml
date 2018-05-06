@@ -1,0 +1,3 @@
+path:
+    data: ${ELASTIC_DATA_DIR}
+    logs: ${ELASTIC_LOG_DIR}

@@ -1,0 +1,71 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: null
+  generation: 1
+  labels:
+    app: elk-objectstore-app
+    version: "1.19.1113"
+    component: elk-elasticsearch
+  name: elasticsearch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elk-objectstore-app
+      version: "1.19.1113"
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: elk-objectstore-app
+        version: "1.19.1113"
+        # version: latest
+        component: elk-elasticsearch
+      name: elk-objectstore-tmpl
+      # this works only with Docker >= 1.12 and OTC 3.0
+      #annotations:
+      #  security.alpha.kubernetes.io/unsafe-sysctls: vm.max_map_count=262144
+    spec:
+      containers:
+      - image: 160.44.200.121:443/otc-eu-de-00000000001000023731/elasticsearch:6.2.400 
+        imagePullPolicy: Always
+        name: elk-objectstore-elasticsearch
+        ports:
+        - containerPort: 9200
+        resources: {}
+        stdin: true
+        tty: true
+        securityContext:
+          privileged: false
+        terminationMessagePath: /dev/termination-log
+        volumeMounts:
+        - mountPath: /var/lib/elasticsearch
+          name: index-volume
+        # initCOntainers is a workaround for docker <1.12 and OTC 2.2
+        # to handle the requiredd sysctl setting properly and still not
+        # running elasticsearch in a privileged container
+        # This was is required for auto-healing and scaling
+      initContainers:
+      - name: elastic-set-sysctl-node
+        image: busybox
+        command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
+        securityContext:
+          privileged: true 
+      volumes:
+      - name: index-volume
+        emptyDir: {}
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: mypullsecret-short
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status: {}
