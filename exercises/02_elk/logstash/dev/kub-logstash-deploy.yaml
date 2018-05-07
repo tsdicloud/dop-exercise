@@ -31,7 +31,7 @@ spec:
       name: elk-objectstore-tmpl
     spec:
       containers:
-      - image: 160.44.200.121:443/otc00000000001000000317/logstash:5.6.1
+      - image: 160.44.200.121:443/otc-eu-de-00000000001000023731/logstash:6.2.400
         imagePullPolicy: Always
         name: elk-objectstore-elasticsearch
         ports:

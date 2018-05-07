@@ -82,10 +82,11 @@ curl -s -XPUT http://$ELASTICSEARCH_SERVICE_HOST:$ELASTICSEARCH_SERVICE_PORT/log
 
 ####
 # Start logstash for logfile processing
-bin/logstash \
-       --http.host `hostname -I | sed 's/\([0-9.]+\)/\1/'` \
-       --path.settings "${LOGSTASH_SETTINGS_DIR}" \
-       --path.config "${LOGSTASH_CONF_DIR}" \
-       --path.data "${LOGSTASH_DATA_DIR}"
+bin/logstash 
+# \
+#      --http.host `hostname -I | sed 's/\([0-9.]+\)/\1/'` \
+#      --path.settings "${LOGSTASH_SETTINGS_DIR}" \
+#      --path.config "${LOGSTASH_CONF_DIR}" \
+#      --path.data "${LOGSTASH_DATA_DIR}"
 
 
